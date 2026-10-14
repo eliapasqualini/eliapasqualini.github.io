@@ -109,7 +109,7 @@
 
 
   /* ---------- Gallery ---------- */
-  const galCats = ['all', 'travel', 'mountain', 'sea', 'people', 'sport'];
+  const galCats = ['all', 'travel', 'mountain', 'sea', 'sport'];
   const img = (name, w = 800) => `img/${name}-${w}.webp`;
   const galVisible = () => S.gallery.filter((g) => galFilter === 'all' || g.cat === galFilter);
   function renderGallery() {
