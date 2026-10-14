@@ -70,7 +70,7 @@
   const PROJECTS = S.commits.filter((c) => c.file);
   const FOLDERS = ['work', 'uni', 'personal'];
   const folderOpen = { work: true, uni: true, personal: true };
-  let projSel = PROJECTS[0].id;
+  let projSel = (PROJECTS.find((c) => c.branch === 'work') || PROJECTS[0]).id;
 
   function renderProjects() {
     const c = PROJECTS.find((x) => x.id === projSel), r = c.r;
@@ -92,7 +92,7 @@
         <div class="ex-crumb">${t('proj.root')} › ${c.branch} › ${c.file}.md</div>
         <article class="ex-body md" id="projDoc">
           <h3>${esc(L(c.t)).replace(/^./, (m) => m.toUpperCase())} ${c.ex ? EX() : ''}</h3>
-          <div class="ex-meta"><span>${esc(S.scopes[c.scope] ? L(S.scopes[c.scope]) : c.scope)}</span><span>·</span><span>${c.year}${c.yq ? '?' : ''}</span>
+          <div class="ex-meta"><span>${esc(S.scopes[c.scope] ? L(S.scopes[c.scope]) : c.scope)}</span>${c.year ? `<span>·</span><span>${c.year}${c.yq ? '?' : ''}</span>` : ''}${c.wip ? `<span class="wip">🚧 ${t('proj.wip')}</span>` : ''}
             ${c.nda ? '<span class="badge"><b>code</b><i class="nda">🔒 NDA</i></span>' : c.link ? '<span class="badge"><b>code</b><i class="pub">public</i></span>' : ''}</div>
           ${c.nda ? `<blockquote class="callout">${t('proj.nda')}</blockquote>` : ''}
           ${sec('context')}${sec('problem')}${sec('solution')}${arch}${stack}${sec('outcome')}
@@ -248,7 +248,7 @@
     ['p', '  company'], ['', ': '], ['s', "'Marlu'"], ['', ',\n'],
     ['p', '  based'], ['', ': '], ['s', "'San Marino 🇸🇲'"], ['', ',\n'],
     ['p', '  education'], ['', ': ['], ['s', "'BSc'"], ['', ', '], ['s', "'MSc'"], ['', '],  '], ['c', '// UniBo · Cesena\n'],
-    ['p', '  stack'], ['', ': ['], ['s', "'SQL'"], ['', ', '], ['s', "'Power BI'"], ['', ', '], ['s', "'Python'"], ['', ', '], ['s', "'JS'"], ['', '],\n'],
+    ['p', '  stack'], ['', ': ['], ['s', "'SQL'"], ['', ', '], ['s', "'Power BI'"], ['', ', '], ['s', "'Fabric'"], ['', ', '], ['s', "'DAX'"], ['', '],\n'],
     ['p', '  offline'], ['', ': ['], ['s', "'travel ✈️'"], ['', ', '], ['s', "'futsal ⚽'"], ['', '],\n'],
     ['p', '  coffee'], ['', ': '], ['n', 'Infinity'], ['', ',\n'],
     ['', '};\n\n'],
@@ -278,7 +278,7 @@
   const hist = []; let hIdx = 0;
 
   const TABLES = {
-    projects: () => S.commits.filter((c) => c.file).map((c) => ({ hash: hash(c.id), branch: S.branches[c.branch].label, year: c.year, title: c.t.en, stack: (c.r.stack || []).map((x) => x[0]).join('|'), nda: c.nda ? 'yes' : 'no' })),
+    projects: () => S.commits.filter((c) => c.file).map((c) => ({ hash: hash(c.id), branch: S.branches[c.branch].label, year: c.year || '-', title: c.t.en, stack: (c.r.stack || []).map((x) => x[0]).join('|'), nda: c.nda ? 'yes' : 'no' })),
     stack: () => techs.map((k) => ({ tech: k, projects: S.commits.filter((c) => (c.r.stack || []).some((x) => x[0] === k)).length })),
   };
   function asciiTable(rows, cols) {
@@ -340,8 +340,8 @@
       if (a[0] === 'show') {
         const c = S.commits.filter((x) => x.file || x.branch === 'main').find((x) => (a[1] && hash(x.id).startsWith(a[1])) || x.id === a[1]);
         if (!c) return `<span class="err">fatal: bad revision '${esc(a[1] || '')}'</span>`;
-        const r = c.r, sec = (k) => (r[k] ? `\n## ${k}\n${esc(r[k].en)}` : '');
-        return `<span class="hl">commit ${hash(c.id)}</span>  (${S.branches[c.branch].label}, ${c.year})\n\n# ${esc(c.t.en)}${c.nda ? '\n🔒 NDA — confidential company project' : ''}${sec('context')}${sec('problem')}${sec('solution')}${r.arch && r.arch.length > 1 ? '\n## architecture\n' + esc(r.arch.join(' → ')) : ''}${r.stack ? '\n## stack\n' + r.stack.map(([k, w]) => '- ' + esc(k) + ': ' + esc(w.en)).join('\n') : ''}`;
+        const r = c.r, sec = (k) => (r[k] ? `\n## ${k}\n${esc(r[k].en.replace(/\*\*/g, ''))}` : '');
+        return `<span class="hl">commit ${hash(c.id)}</span>  (${S.branches[c.branch].label}${c.year ? ', ' + c.year : ''})\n\n# ${esc(c.t.en)}${c.nda ? '\n🔒 NDA — confidential company project' : ''}${sec('context')}${sec('problem')}${sec('solution')}${r.arch && r.arch.length > 1 ? '\n## architecture\n' + esc(r.arch.join(' → ')) : ''}${r.stack ? '\n## stack\n' + r.stack.map(([k, w]) => '- ' + esc(k) + ': ' + esc(w.en)).join('\n') : ''}`;
       }
       if (a[0] === 'status') return 'On branch work/marlu\nnothing to commit, working tree clean ☕';
       return 'usage: git &lt;log | show &lt;hash&gt; | status&gt;';
