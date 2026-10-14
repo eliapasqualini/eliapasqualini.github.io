@@ -110,7 +110,7 @@
 
   /* ---------- Gallery ---------- */
   const galCats = ['all', 'travel', 'milestones', 'people', 'sport'];
-  const img = (name, w = 800) => `../img/${name}-${w}.webp`;
+  const img = (name, w = 800) => `img/${name}-${w}.webp`;
   const galVisible = () => S.gallery.filter((g) => galFilter === 'all' || g.cat === galFilter);
   function renderGallery() {
     $('#galFilters').innerHTML = galCats.filter((c) => c === 'all' || S.gallery.some((g) => g.cat === c))
@@ -209,12 +209,12 @@
     const [y, m] = S.now.updated.split('-').map(Number);
     $('#nowUpdated').textContent = `· ${t('now.updated')} ${new Date(y, m - 1, 1).toLocaleDateString(lang === 'it' ? 'it-IT' : 'en-GB', { month: 'long', year: 'numeric' })}`;
     $('#nowList').innerHTML = S.now.items.map((n) => {
-      const ico = n.logo ? `<img class="now-logo" src="../img/${n.logo}" alt="">` : `<span class="now-ico" aria-hidden="true">${n.icon}</span>`;
+      const ico = n.logo ? `<img class="now-logo" src="img/${n.logo}" alt="">` : `<span class="now-ico" aria-hidden="true">${n.icon}</span>`;
       const extra = n.spotify
         ? `<iframe class="now-spotify" src="https://open.spotify.com/embed/track/${n.spotify}?utm_source=generator&theme=0" height="80" loading="lazy" title="Spotify: ${esc(L(n.v))} – ${esc(L(n.sub))}" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>`
         : n.countdown ? `<span class="now-count">${countdown(n.countdown)}</span>` : '';
       return `<div class="now-card reveal${n.cover ? ' has-cover' : ''}">
-        ${n.cover ? `<img class="now-cover" src="../img/${n.cover}" alt="${esc(L(n.v))}" loading="lazy">` : ''}
+        ${n.cover ? `<img class="now-cover" src="img/${n.cover}" alt="${esc(L(n.v))}" loading="lazy">` : ''}
         <div class="now-text">${ico}<small>${esc(L(n.k))}</small><b>${esc(L(n.v))}</b>${n.sub ? `<span class="now-sub">${esc(L(n.sub))}</span>` : ''}${n.ex ? EX() : ''}</div>
         ${extra}</div>`;
     }).join('');

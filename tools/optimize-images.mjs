@@ -1,5 +1,5 @@
 // Converts source photos into web-ready WebP files.
-// Usage: npm run images            (processes ./foto and the photos in the repo root)
+// Usage: npm run images   (processes the original photos in ./foto, which is not tracked by git)
 // Output: ./img/<name>-800.webp and ./img/<name>-1600.webp (+ <name>-400.webp for avatars)
 import sharp from 'sharp';
 import { readdir, mkdir, stat } from 'node:fs/promises';

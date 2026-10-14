@@ -37,7 +37,6 @@ h1, h2, h3, h4 { font-family: 'Fira Code', monospace; font-weight: 600; letter-s
   text-transform: uppercase; vertical-align: middle; color: var(--warn); border: 1px dashed var(--warn); border-radius: 999px; padding: 1px 8px;
 }
 .todo.sm { font-size: 9px; padding: 0 6px; color: #8a6d00; border-color: #c9a227; }
-.proto-banner { font-family: 'Fira Code', monospace; font-size: 12px; text-align: center; padding: 6px 16px; background: var(--warn); color: #1a1400; }
 
 /* ---------- Top bar ---------- */
 .topbar {

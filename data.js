@@ -2,7 +2,6 @@
 window.SITE = {
   i18n: {
     it: {
-      banner: 'Prototipo · i contenuti marcati "esempio" sono segnaposto da sostituire',
       'nav.about': 'README', 'nav.timeline': 'In numeri', 'nav.projects': 'Progetti', 'nav.life': 'Viaggi & vita', 'nav.now': 'Adesso', 'nav.contact': 'Contatti',
       'hero.lead': 'Scrivo software e trasformo dati in decisioni. Da San Marino, la Repubblica più antica del mondo.',
       'cta.projects': 'Progetti', 'cta.life': 'Viaggi & vita',
@@ -23,7 +22,6 @@ window.SITE = {
       copied: 'Email copiata ✓',
     },
     en: {
-      banner: 'Prototype · content marked "example" is placeholder',
       'nav.about': 'README', 'nav.timeline': 'By the numbers', 'nav.projects': 'Projects', 'nav.life': 'Travel & life', 'nav.now': 'Now', 'nav.contact': 'Contact',
       'hero.lead': 'I write software and turn data into decisions. From San Marino, the oldest republic in the world.',
       'cta.projects': 'Projects', 'cta.life': 'Travel & life',
@@ -58,11 +56,6 @@ Mi piace capire come funzionano le cose e poi renderle più semplici. Oggi guido
 - Trasformo domande di business in **numeri affidabili** su cui prendere decisioni
 - **Automatizzo** i processi ripetitivi: se lo faccio due volte, lo scrivo in codice
 
-## 🧭 Come lavoro {{ex}}
-- Prima capisco il problema, poi scelgo lo strumento
-- Codice leggibile > codice furbo
-- Un buon report risponde a una domanda, non a dieci
-
 ## 🎓 Formazione
 - Laurea magistrale in Ingegneria e Scienze Informatiche · UniBo Cesena · \`102/110\`
 - Laurea triennale · stesso corso · \`98/110\`
@@ -84,11 +77,6 @@ I like understanding how things work and then making them simpler. Today I lead 
 - Own the whole **Business Intelligence** area: data models, data warehouse, dashboards
 - Turn business questions into **reliable numbers** people can decide on
 - **Automate** repetitive work: if I do it twice, I write code for it
-
-## 🧭 How I work {{ex}}
-- Understand the problem first, then pick the tool
-- Readable code > clever code
-- A good report answers one question, not ten
 
 ## 🎓 Education
 - MSc Computer Science & Engineering · UniBo Cesena · \`102/110\`
