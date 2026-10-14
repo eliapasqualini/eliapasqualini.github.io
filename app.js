@@ -109,7 +109,7 @@
 
 
   /* ---------- Gallery ---------- */
-  const galCats = ['all', 'travel', 'milestones', 'people', 'sport'];
+  const galCats = ['all', 'travel', 'mountain', 'sea', 'people', 'sport'];
   const img = (name, w = 800) => `img/${name}-${w}.webp`;
   const galVisible = () => S.gallery.filter((g) => galFilter === 'all' || g.cat === galFilter);
   function renderGallery() {
@@ -118,7 +118,7 @@
     $('#galleryList').innerHTML = galVisible().map((g, i) =>
       `<button class="shot" data-i="${i}" style="--tilt:${[-2, 1.5, -1, 2.5][i % 4]}deg">
         <img src="${img(g.photo)}" srcset="${img(g.photo)} 800w, ${img(g.photo, 1600)} 1600w" sizes="(max-width: 600px) 90vw, 300px" alt="${esc(L(g.c))}" loading="lazy">
-        <span class="shot-cap"><b>${esc(L(g.c))}</b><small>${g.d}</small></span></button>`).join('');
+        <span class="shot-cap"><b>${esc(L(g.c))}</b><small>${esc(L(g.d))}</small></span></button>`).join('');
   }
   let lbIndex = 0, lbList = [];
   function openLightbox(i, list) {
@@ -413,7 +413,7 @@
     const gChip = e.target.closest('#galFilters .chip');
     if (gChip) { galFilter = gChip.dataset.g; renderGallery(); return; }
     const shot = e.target.closest('.shot');
-    if (shot) { openLightbox(+shot.dataset.i, galVisible().map((g) => ({ photo: g.photo, cap: `${L(g.c)} · ${g.d}` }))); return; }
+    if (shot) { openLightbox(+shot.dataset.i, galVisible().map((g) => ({ photo: g.photo, cap: `${L(g.c)} · ${L(g.d)}` }))); return; }
     const nav = e.target.closest('.lb-nav');
     if (nav) { openLightbox(lbIndex + (nav.classList.contains('next') ? 1 : -1)); return; }
     if (e.target.closest('#lightbox')) { $('#lightbox').hidden = true; return; }
