@@ -78,6 +78,29 @@ h1, h2, h3, h4 { font-family: 'Fira Code', monospace; font-weight: 600; letter-s
 .cw-bar i:nth-child(3) { background: #28c840; }
 .cw-bar span { margin-left: 10px; font-family: 'Fira Code', monospace; font-size: 12px; color: #8b98a8; }
 .code-window pre { margin: 0; padding: 20px 22px; min-height: 330px; font-family: 'Fira Code', monospace; font-size: clamp(12px, 1.05vw, 14.5px); line-height: 1.75; white-space: pre-wrap; }
+/* Hero portrait (cut-out photo + code card) */
+.hero-visual { position: relative; display: flex; justify-content: flex-end; min-height: 600px; padding-bottom: 40px; }
+.hero-photo { position: relative; margin: 0; width: min(100%, 520px); aspect-ratio: 833 / 900; }
+.hero-photo::before {
+  content: ""; position: absolute; inset: 14% 2% 0 6%; border-radius: 50% 50% 28px 28px;
+  background: radial-gradient(circle at 55% 30%, rgba(0,178,255,.38), rgba(0,178,255,.08) 55%, transparent 72%);
+  border: 1px solid rgba(0,178,255,.22);
+}
+.hero-photo img {
+  position: relative; width: 100%; height: 100%; object-fit: contain;
+  filter: grayscale(1) sepia(.55) hue-rotate(165deg) saturate(1.7) contrast(1.12) brightness(.95);
+  -webkit-mask-image: linear-gradient(#000 72%, transparent 98%); mask-image: linear-gradient(#000 72%, transparent 98%);
+  transition: filter .7s ease;
+}
+.hero-photo::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .28; transition: opacity .7s;
+  background: repeating-linear-gradient(0deg, rgba(11,15,20,.5) 0 1px, transparent 1px 3px);
+  -webkit-mask: url(img/hero-900.webp) center / contain no-repeat; mask: url(img/hero-900.webp) center / contain no-repeat;
+}
+.hero-visual:hover .hero-photo img { filter: none; }
+.hero-visual:hover .hero-photo::after { opacity: 0; }
+.hero-visual .code-window { position: absolute; left: -6%; bottom: 0; width: min(330px, 62%); z-index: 2; }
+.hero-visual .code-window pre { min-height: 0; height: calc(12 * 1.65em + 30px); padding: 15px 16px; font-size: 11px; line-height: 1.65; white-space: pre; overflow: hidden; }
 .tk-k { color: #ff7b72; } .tk-v { color: #d2a8ff; } .tk-p { color: #79c0ff; } .tk-s { color: #a5d6ff; } .tk-n { color: #f2cc60; } .tk-c { color: #8b949e; font-style: italic; }
 .caret { display: inline-block; width: .55em; height: 1.1em; vertical-align: -0.2em; background: var(--accent); animation: blink 1s steps(1) infinite; }
 @keyframes blink { 50% { opacity: 0; } }
@@ -154,10 +177,6 @@ h1, h2, h3, h4 { font-family: 'Fira Code', monospace; font-weight: 600; letter-s
 .readme-head { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; padding: 10px 16px; background: var(--surface-2); border-bottom: 1px solid var(--line); }
 .readme-file { display: flex; align-items: center; gap: 10px; font-family: 'Fira Code', monospace; font-size: 13px; color: var(--muted); }
 .readme-file b { color: var(--text); font-weight: 600; }
-.avatar { position: relative; width: 34px; height: 34px; border-radius: 50%; overflow: hidden; border: 1px solid var(--line); flex: none; }
-.avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: opacity .4s; }
-.avatar .color { opacity: 0; }
-.readme:hover .avatar .color { opacity: 1; }
 .seg { margin-left: auto; display: flex; border: 1px solid var(--line); border-radius: 8px; overflow: hidden; }
 .seg button { border: 0; background: transparent; padding: 5px 12px; font-size: 13px; color: var(--muted); }
 .seg button[aria-pressed="true"] { background: var(--bg); color: var(--text); }
@@ -296,6 +315,9 @@ h1, h2, h3, h4 { font-family: 'Fira Code', monospace; font-weight: 600; letter-s
   .controls { margin-left: auto; }
   .hero-grid { grid-template-columns: 1fr; }
   .code-window pre { min-height: 0; }
+  .hero-visual { flex-direction: column; align-items: center; min-height: 0; gap: 0; }
+  .hero-photo { width: min(80vw, 380px); }
+  .hero-visual .code-window { position: relative; left: auto; bottom: auto; width: 100%; margin-top: -60px; }
 }
 @media (max-width: 640px) {
   .ex { grid-template-columns: 1fr; min-height: 0; }
