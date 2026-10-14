@@ -3,7 +3,7 @@ window.SITE = {
   i18n: {
     it: {
       'nav.about': 'README', 'nav.timeline': 'In numeri', 'nav.projects': 'Progetti', 'nav.life': 'Viaggi & vita', 'nav.now': 'Adesso', 'nav.contact': 'Contatti',
-      'hero.lead': 'Scrivo software e trasformo dati in decisioni. Da San Marino, la Repubblica più antica del mondo.',
+      'hero.lead': 'Scrivo software e trasformo dati in decisioni.',
       'cta.projects': 'Progetti', 'cta.life': 'Viaggi & vita',
       'about.title': 'README.md', 'about.preview': 'Anteprima', 'about.code': 'Codice',
       'nb.title': 'Elia in numeri', 'nb.lead': 'La mia storia, raccontata come la racconterebbe un data analyst: con una dashboard. Dati aggiornati in tempo reale, precisione variabile.', 'nb.source': 'Fonte: memoria di Elia · affidabilità: buona',
@@ -23,7 +23,7 @@ window.SITE = {
     },
     en: {
       'nav.about': 'README', 'nav.timeline': 'By the numbers', 'nav.projects': 'Projects', 'nav.life': 'Travel & life', 'nav.now': 'Now', 'nav.contact': 'Contact',
-      'hero.lead': 'I write software and turn data into decisions. From San Marino, the oldest republic in the world.',
+      'hero.lead': 'I write software and turn data into decisions.',
       'cta.projects': 'Projects', 'cta.life': 'Travel & life',
       'about.title': 'README.md', 'about.preview': 'Preview', 'about.code': 'Code',
       'nb.title': 'Elia by the numbers', 'nb.lead': 'My story, told the way a data analyst would tell it: as a dashboard. Real-time data, variable precision.', 'nb.source': 'Source: Elia’s memory · reliability: good',
